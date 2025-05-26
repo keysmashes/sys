@@ -12,7 +12,7 @@
     programs.keychain = {
       enable = true;
       keys = [ "id_ed25519" ];
-      extraFlags = [ "--noask" "--quiet" ];
+      extraFlags = [ "--noask" "--quiet" "--absolute" "--dir" "$XDG_RUNTIME_DIR/keychain" ];
     };
   };
 }
