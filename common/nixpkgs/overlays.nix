@@ -54,16 +54,6 @@ in
         ];
       });
     });
-    wireplumber = assert super.wireplumber.version == "0.5.8"; super.wireplumber.overrideAttrs (old: {
-      patches = (old.patches or []) ++ [
-        (super.fetchpatch {
-          name = "dont-populate-session-services-via-script.patch";
-          url = "https://gitlab.freedesktop.org/pipewire/wireplumber/-/commit/b031d3fcd1b727b2a096b4ac81f785dc7f31ede2.patch";
-          revert = true;
-          sha256 = "sha256-UGMXaRJKVuOf7r4ipYCI5eVU+xC1gbGKusCnu5zwzqo=";
-        })
-      ];
-    });
     # custom patches
     gpu-screen-recorder = super.gpu-screen-recorder.overrideAttrs (old: {
       patches = (old.patches or []) ++ [
