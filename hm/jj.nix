@@ -76,6 +76,15 @@
               diff.git(),
             )
           '';
+          file_annotate = ''
+            separate(" ",
+              commit.change_id().shortest(8),
+              if(first_line_in_hunk, pad_end(14, truncate_end(14, commit.author().email(), '…')), pad_start(14, "")),
+              if(first_line_in_hunk, commit_timestamp(commit).local().format('%Y-%m-%d %H:%M:%S'), pad_start(19, "")),
+              if(first_line_in_hunk, pad_end(52, truncate_end(52, commit.description().first_line(), '…')), pad_start(52, "")),
+              pad_start(4, line_number),
+            ) ++ ": " ++ content
+          '';
         };
         user = {
           name = config.sys.git.name;
