@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }:
 
+let
+  vs15 = builtins.fromJSON ''"\uFE0E"'';
+  heavyLargeCircle = builtins.fromJSON ''"\u2B55"'';
+in
 {
   options = {
     sys.jj.enable = lib.mkOption {
@@ -94,7 +98,31 @@
               pad_start(4, line_number),
             ) ++ ": " ++ content
           '';
+          log_node = ''
+            coalesce(
+              if(!self, label("elided", "~")),
+              label(
+                separate(" ",
+                  if(current_working_copy, "working_copy"),
+                  if(immutable, "immutable"),
+                  if(conflict, "conflict"),
+                ),
+                coalesce(
+                  if(current_working_copy, "@"),
+                  if(immutable, "◆"),
+                  if(conflict, "×"),
+                  "${heavyLargeCircle}${vs15}",
+                )
+              )
+            )
+          '';
         };
+        op_log_node = ''
+          coalesce(
+            if(current_operation, label("current_operation", "@")),
+            "${heavyLargeCircle}${vs15}",
+          )
+        '';
         user = {
           name = config.sys.git.name;
           email = config.sys.git.email;
