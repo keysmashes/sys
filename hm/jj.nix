@@ -17,6 +17,7 @@
           mkBashScript = text: [ "util" "exec" "--" "bash" "-c" text "bash" ];
         in {
           aa = [ "log" "-r" "all()" ];
+          blame = [ "file" "annotate" ];
           blt = [ "b" "l" "-t" ];
           bn = mkBashScript ''
             jj b m "$1" -t "($1)+"
