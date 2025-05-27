@@ -22,11 +22,17 @@
           bn = mkBashScript ''
             jj b m "$1" -t "($1)+"
           '';
+          bnf = mkBashScript ''
+            jj b m -f "$1" -t "($1)+"
+          '';
           bnew = mkBashScript ''
             jj new --no-edit "$@" && jj bn "''${@:$#}"
           '';
           bp = mkBashScript ''
             jj b m "$1" -t "($1)-"
+          '';
+          bpf = mkBashScript ''
+            jj b m -f "$1" -t "($1)-"
           '';
           drop = [ "abandon" ];
           hash = [ "show" "-T" "stringify(commit_id)" ];
@@ -47,6 +53,9 @@
             jj log --no-graph -r "''${1:-@}" -T description | sed -e 's/^wip: //' | jj desc --stdin "''${1:-@}"
           '' "bash" ];
           update = [ "git" "fetch" "--all-remotes" ];
+          wa = mkBashScript ''
+            jj wip "$1" && jj bnew -A "$1"
+          '';
           wip = [ "bookmark" "set" "--allow-backwards" "wip" "--revision" ];
           wop = [ "bookmark" "forget" "wip" ];
         };
