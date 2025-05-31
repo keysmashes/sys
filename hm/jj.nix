@@ -1,9 +1,5 @@
 { config, lib, pkgs, ... }:
 
-let
-  vs15 = builtins.fromJSON ''"\uFE0E"'';
-  heavyLargeCircle = builtins.fromJSON ''"\u2B55"'';
-in
 {
   options = {
     sys.jj.enable = lib.mkOption {
@@ -111,7 +107,7 @@ in
                   if(current_working_copy, "@"),
                   if(immutable, "◆"),
                   if(conflict, "×"),
-                  "${heavyLargeCircle}${vs15}",
+                  "·",
                 )
               )
             )
@@ -120,7 +116,7 @@ in
         op_log_node = ''
           coalesce(
             if(current_operation, label("current_operation", "@")),
-            "${heavyLargeCircle}${vs15}",
+            "·",
           )
         '';
         user = {
