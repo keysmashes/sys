@@ -47,13 +47,6 @@ in
         })
       ];
     });
-    vimPlugins = super.vimPlugins.extend (self': super': {
-      gruvbox-community = super'.gruvbox-community.overrideAttrs (old: {
-        patches = (old.patches or []) ++ [
-          (localPath ./patches/gruvbox-0001-background.patch)
-        ];
-      });
-    });
     # custom patches
     gpu-screen-recorder = super.gpu-screen-recorder.overrideAttrs (old: {
       patches = (old.patches or []) ++ [

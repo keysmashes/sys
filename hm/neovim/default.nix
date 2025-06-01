@@ -111,6 +111,11 @@
         {
           plugin = gruvbox-community;
           config = ''
+            " https://github.com/gruvbox-community/gruvbox/pull/201#issuecomment-2867888183
+            augroup my_gruvbox_colors
+              au!
+              autocmd ColorScheme gruvbox hi! Normal guibg=NONE ctermbg=NONE
+            augroup END
             let g:gruvbox_italic = 1
             let g:gruvbox_contrast_light = 'hard'
             let g:gruvbox_contrast_dark = 'hard'
