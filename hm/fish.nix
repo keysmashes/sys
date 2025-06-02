@@ -47,6 +47,7 @@
           # see https://github.com/fish-shell/fish-shell/pull/8142 for inspiration, though we don't actually need that feature
           # this means that the time shown in the prompt is the time the command was run, not the time the prompt was first printed
           bind \r repaint execute
+          bind ctrl-shift-r repaint
         '';
         icat = "kitty +kitten icat --align left --place (math $COLUMNS - 2)x(math $LINES - 2)@0x(math $LINES - 1) $argv";
         kd = {
