@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options = {
@@ -12,7 +12,7 @@
     programs.keychain = {
       enable = true;
       keys = [ "id_ed25519" ];
-      extraFlags = [ "--noask" "--quiet" "--absolute" "--dir" "$XDG_RUNTIME_DIR/keychain" ];
+      extraFlags = [ "--noask" "--quiet" ] ++ lib.optionals (pkgs.hostPlatform.isLinux) [ "--absolute" "--dir" "$XDG_RUNTIME_DIR/keychain" ];
     };
   };
 }
