@@ -1,17 +1,36 @@
 diff --git a/src/main.cpp b/src/main.cpp
-index 8e1723d..9113c9f 100644
+index d716fcda2f..4f2d623119 100644
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -1118,10 +1118,10 @@ static void save_replay_async(AVCodecContext *video_codec_context, int video_str
-     if (make_folders) {
-         std::string output_folder = output_dir + '/' + get_date_only_str();
-         create_directory_recursive(&output_folder[0]);
--        save_replay_output_filepath = output_folder + "/Replay_" + get_time_only_str() + "." + file_extension;
-+        save_replay_output_filepath = output_folder + "/" + get_time_only_str() + "." + file_extension;
+@@ -1241,11 +1241,11 @@
+         std::string output_folder = directory + '/' + get_date_only_str();
+         if(create_directory_recursive(&output_folder[0]) != 0)
+             fprintf(stderr, "Error: failed to create directory: %s\n", output_folder.c_str());
+-        output_filepath = output_folder + "/" + filename_prefix + "_" + get_time_only_str() + "." + file_extension;
++        output_filepath = output_folder + "/" + filename_prefix + get_time_only_str() + "." + file_extension;
      } else {
-         create_directory_recursive(&output_dir[0]);
--        save_replay_output_filepath = output_dir + "/Replay_" + get_date_str() + "." + file_extension;
-+        save_replay_output_filepath = output_dir + "/" + get_date_str() + "." + file_extension;
+         if(create_directory_recursive(&directory[0]) != 0)
+             fprintf(stderr, "Error: failed to create directory: %s\n", directory.c_str());
+-        output_filepath = directory + "/" + filename_prefix + "_" + get_date_str() + "." + file_extension;
++        output_filepath = directory + "/" + filename_prefix + get_date_str() + "." + file_extension;
+     }
+     return output_filepath;
+ }
+@@ -1285,7 +1285,7 @@
+         return;
      }
  
-     save_replay_thread = std::async(std::launch::async, [video_stream_index, container_format, start_index, video_pts_offset, audio_pts_offset, video_codec_context, &audio_tracks]() mutable {
+-    std::string output_filepath = create_new_recording_filepath_from_timestamp(output_dir, "Replay", file_extension, date_folders);
++    std::string output_filepath = create_new_recording_filepath_from_timestamp(output_dir, "", file_extension, date_folders);
+     RecordingStartResult recording_start_result = start_recording_create_streams(output_filepath.c_str(), container_format, video_codec_context, audio_tracks, hdr, capture);
+     if(!recording_start_result.av_format_context)
+         return;
+@@ -3694,7 +3694,7 @@
+             if(new_replay_recording_state) {
+                 std::lock_guard<std::mutex> lock(audio_filter_mutex);
+                 replay_recording_items.clear();
+-                replay_recording_filepath = create_new_recording_filepath_from_timestamp(arg_parser.replay_recording_directory, "Video", file_extension, arg_parser.date_folders);
++                replay_recording_filepath = create_new_recording_filepath_from_timestamp(arg_parser.replay_recording_directory, "Video_", file_extension, arg_parser.date_folders);
+                 replay_recording_start_result = start_recording_create_streams(replay_recording_filepath.c_str(), arg_parser.container_format, video_codec_context, audio_tracks, hdr, capture);
+                 if(replay_recording_start_result.av_format_context) {
+                     const size_t video_recording_destination_id = gsr_encoder_add_recording_destination(&encoder, video_codec_context, replay_recording_start_result.av_format_context, replay_recording_start_result.video_stream, video_frame->pts);

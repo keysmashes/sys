@@ -1,13 +1,13 @@
-diff --git a/src/main.cpp b/src/main.cpp
-index 5fe9118..b1cdf75 100644
---- a/src/main.cpp
-+++ b/src/main.cpp
-@@ -3396,7 +3396,7 @@ int main(int argc, char **argv) {
-     }
+diff --git a/src/args_parser.c b/src/args_parser.c
+index 0e055572ed..687d8f5de4 100644
+--- a/src/args_parser.c
++++ b/src/args_parser.c
+@@ -451,7 +451,7 @@
  
-     bool overclock = arg_get_boolean_value(args, "-oc", false);
--    const bool verbose = arg_get_boolean_value(args, "-v", true);
-+    const bool verbose = arg_get_boolean_value(args, "-v", false);
-     const bool gl_debug = arg_get_boolean_value(args, "-gl-debug", false);
-     const bool record_cursor = arg_get_boolean_value(args, "-cursor", true);
-     const bool date_folders = arg_get_boolean_value(args, "-df", false);
+     const char *window = args_get_value_by_key(self->args, NUM_ARGS, "-w");
+     snprintf(self->window, sizeof(self->window), "%s", window);
+-    self->verbose = args_get_boolean_by_key(self->args, NUM_ARGS, "-v", true);
++    self->verbose = args_get_boolean_by_key(self->args, NUM_ARGS, "-v", false);
+     self->gl_debug = args_get_boolean_by_key(self->args, NUM_ARGS, "-gl-debug", false);
+     self->record_cursor = args_get_boolean_by_key(self->args, NUM_ARGS, "-cursor", true);
+     self->date_folders = args_get_boolean_by_key(self->args, NUM_ARGS, "-df", false);
