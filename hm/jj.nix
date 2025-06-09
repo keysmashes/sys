@@ -113,13 +113,13 @@
               )
             )
           '';
+          op_log_node = ''
+            coalesce(
+              if(current_operation, label("current_operation", "@")),
+              "·",
+            )
+          '';
         };
-        op_log_node = ''
-          coalesce(
-            if(current_operation, label("current_operation", "@")),
-            "·",
-          )
-        '';
         user = {
           name = config.sys.git.name;
           email = config.sys.git.email;
