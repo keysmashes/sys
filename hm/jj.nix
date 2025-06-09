@@ -35,6 +35,7 @@
             jj b m -f "$1" -t "($1)-"
           '';
           drop = [ "abandon" ];
+          dup = [ "duplicate" ];
           hash = [ "show" "-T" "stringify(commit_id)" ];
           id = [ "show" "-T" "stringify(change_id)" ];
           link = mkBashScript ''
