@@ -18,6 +18,8 @@
         in {
           aa = [ "log" "-r" "all()" ];
           blame = [ "file" "annotate" ];
+          bl = [ "b" "l" ];
+          bla = [ "b" "l" "-a" ];
           blt = [ "b" "l" "-t" ];
           bn = mkBashScript ''
             jj b m "$1" -t "($1)+"
