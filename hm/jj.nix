@@ -119,6 +119,12 @@
               "·",
             )
           '';
+          show = ''
+            concat(
+              builtin_log_detailed,
+              surround("", "\n", diff.summary()),
+            )
+          '';
         };
         user = {
           name = config.sys.git.name;
