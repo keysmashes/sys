@@ -43,6 +43,8 @@
           link = mkBashScript ''
             jj rebase -s "$2" -d "all:($2)-" -d "$1"
           '';
+          n = [ "next" "-e" ];
+          p = [ "prev" "-e" ];
           pog = [ "op" "log" "-p" ];
           shop = [ "op" "show" "-p" ];
           slink = mkBashScript ''
@@ -69,11 +71,11 @@
         git = {
           private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
         };
-        revset-aliases = {
-          h = "@+";
+        revset-aliases = let
+          mkRepeated = char: direction: lib.genAttrs (builtins.genList (x: lib.strings.replicate (x+1) char) 5) (name: "@" + lib.strings.replicate (builtins.stringLength name) direction);
+        in {
           i = "@";
-          j = "@-";
-        };
+        } // mkRepeated "h" "+" // mkRepeated "j" "-";
         templates = {
           draft_commit_description = ''
             concat(
