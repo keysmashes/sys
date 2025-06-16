@@ -31,10 +31,10 @@
             jj new --no-edit "$@" && jj bn "''${@:$#}"
           '';
           bp = mkBashScript ''
-            jj b m "$1" -t "($1)-"
+            jj b m --allow-backwards "$1" -t "($1)-"
           '';
           bpf = mkBashScript ''
-            jj b m -f "$1" -t "($1)-"
+            jj b m --allow-backwards -f "$1" -t "($1)-"
           '';
           drop = [ "abandon" ];
           dup = [ "duplicate" ];
