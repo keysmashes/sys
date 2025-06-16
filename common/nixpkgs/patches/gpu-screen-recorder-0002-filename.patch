@@ -1,22 +1,22 @@
 diff --git a/src/main.cpp b/src/main.cpp
-index d716fcda2f..4f2d623119 100644
+index 0956d0a807..d0aed392e2 100644
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -1241,11 +1241,11 @@
+@@ -1246,11 +1246,11 @@
          std::string output_folder = directory + '/' + get_date_only_str();
          if(create_directory_recursive(&output_folder[0]) != 0)
-             fprintf(stderr, "Error: failed to create directory: %s\n", output_folder.c_str());
+             fprintf(stderr, "gsr error: failed to create directory: %s\n", output_folder.c_str());
 -        output_filepath = output_folder + "/" + filename_prefix + "_" + get_time_only_str() + "." + file_extension;
 +        output_filepath = output_folder + "/" + filename_prefix + get_time_only_str() + "." + file_extension;
      } else {
          if(create_directory_recursive(&directory[0]) != 0)
-             fprintf(stderr, "Error: failed to create directory: %s\n", directory.c_str());
+             fprintf(stderr, "gsr error: failed to create directory: %s\n", directory.c_str());
 -        output_filepath = directory + "/" + filename_prefix + "_" + get_date_str() + "." + file_extension;
 +        output_filepath = directory + "/" + filename_prefix + get_date_str() + "." + file_extension;
      }
      return output_filepath;
  }
-@@ -1285,7 +1285,7 @@
+@@ -1290,7 +1290,7 @@
          return;
      }
  
@@ -25,7 +25,7 @@ index d716fcda2f..4f2d623119 100644
      RecordingStartResult recording_start_result = start_recording_create_streams(output_filepath.c_str(), container_format, video_codec_context, audio_tracks, hdr, capture);
      if(!recording_start_result.av_format_context)
          return;
-@@ -3694,7 +3694,7 @@
+@@ -3699,7 +3699,7 @@
              if(new_replay_recording_state) {
                  std::lock_guard<std::mutex> lock(audio_filter_mutex);
                  replay_recording_items.clear();
