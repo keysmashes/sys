@@ -100,6 +100,24 @@
               pad_start(4, line_number),
             ) ++ ": " ++ content
           '';
+          # based on builtin_log_compact
+          log = ''
+            if(root,
+              format_root_commit(self),
+              label(if(current_working_copy, "working_copy"),
+                concat(
+                  format_short_commit_header(self) ++ "\n",
+                  separate(" ",
+                    if(empty, label("empty", "(empty)")),
+                    if(description,
+                      concat(description.first_line(), if(description.lines().len() > 1, " •")),
+                      label(if(empty, "empty"), description_placeholder),
+                    ),
+                  ) ++ "\n",
+                ),
+              )
+            )
+          '';
           log_node = ''
             coalesce(
               if(!self, label("elided", "~")),
