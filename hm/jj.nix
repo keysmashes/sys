@@ -155,6 +155,7 @@
         };
         ui = {
           default-command = "log";
+          diff-editor = ":builtin";
           pager = "some";
         };
       };
