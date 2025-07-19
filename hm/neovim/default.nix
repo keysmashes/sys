@@ -289,7 +289,16 @@
           config = ''
             lua <<EOF
             require'lspconfig'.pyright.setup{}
-            require'lspconfig'.nil_ls.setup{}
+            require'lspconfig'.nil_ls.setup {
+              settings = {
+                nix = {
+                  flake = {
+                    autoArchive = true,
+                    autoEvalInputs = true,
+                  },
+                },
+              },
+            }
             -- NB: as of 2022-11-06, elixirls, r_language_server, and rnix have some root_dir brokenness, fixed by something like:
             -- require'lspconfig'.rnix.setup{
             --   -- fix the default use of $HOME as root_dir ($PWD is probably more sensible)
