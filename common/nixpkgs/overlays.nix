@@ -16,15 +16,6 @@ in
   } else {})
   (self: super: {
     # out-of-date software/waiting for backports
-    kitty = super.kitty.overrideAttrs (old: {
-      patches = (old.patches or []) ++ [
-        (super.fetchpatch {
-          name = "fix-vs15-bug.patch";
-          url = "https://github.com/kovidgoyal/kitty/commit/95f840fd56adcbf71d8abf609046bd4c0557b8dc.patch";
-          hash = "sha256-w+z8g0Rt7sKpwle3U46QZtQvWqXJi7UtZ4Ug+3yuMa0=";
-        })
-      ];
-    });
     termtheme = assert !(super ? termtheme); super.rustPlatform.buildRustPackage {
       pname = "termtheme";
       version = "0-unstable-2025-01-24";
