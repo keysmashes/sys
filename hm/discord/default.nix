@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 let
   krisp-patcher = pkgs.writers.writePython3Bin "krisp-patcher" {
@@ -34,8 +34,11 @@ in
       { assertion = config.sys.discord.vencord -> !config.sys.discord.moonlight; }
     ];
     home.packages = [
-      (lib.mkIf config.sys.discord.moonlight pkgs.discord-moonlight)
-      (lib.mkIf (!config.sys.discord.moonlight) (pkgs.discord.override { withVencord = config.sys.discord.vencord; }))
+      (pkgs.discord.override {
+        withVencord = config.sys.discord.vencord;
+        withMoonlight = config.sys.discord.moonlight;
+        moonlight = inputs.moonlight.packages.${pkgs.system}.moonlight;
+      })
       krisp-patcher
     ];
   };
