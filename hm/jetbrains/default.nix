@@ -1,18 +1,5 @@
-{ config, inputs, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
-let
-  nixpkgs' = pkgs.applyPatches {
-    name = "nixpkgs-425529";
-    src = inputs.nixpkgs;
-    patches = [
-      (pkgs.fetchpatch {
-        url = "https://github.com/NixOS/nixpkgs/pull/425529.patch";
-        sha256 = "02vhsikw1mv83cqaiyl1905wyynq21iff090acii1lgf53c35yqb";
-      })
-    ];
-  };
-  pkgs' = import nixpkgs' { inherit (pkgs) system; inherit (config.nixpkgs) config overlays; };
-in
 {
   options = {
     sys.jetbrains.clion.enable = lib.mkOption {
@@ -43,19 +30,19 @@ in
   };
   config = lib.mkMerge [
     (lib.mkIf config.sys.jetbrains.clion.enable {
-      home.packages = [ pkgs'.jetbrains.clion ];
+      home.packages = [ pkgs.jetbrains.clion ];
     })
     (lib.mkIf config.sys.jetbrains.dataspell.enable {
-      home.packages = [ pkgs'.jetbrains.dataspell ];
+      home.packages = [ pkgs.jetbrains.dataspell ];
     })
     (lib.mkIf config.sys.jetbrains.rider.enable {
-      home.packages = [ pkgs'.jetbrains.rider ];
+      home.packages = [ pkgs.jetbrains.rider ];
     })
     (lib.mkIf config.sys.jetbrains.rustrover.enable {
-      home.packages = [ pkgs'.jetbrains.rust-rover ];
+      home.packages = [ pkgs.jetbrains.rust-rover ];
     })
     (lib.mkIf config.sys.jetbrains.webstorm.enable {
-      home.packages = [ pkgs'.jetbrains.webstorm ];
+      home.packages = [ pkgs.jetbrains.webstorm ];
     })
     ({
       home.file.".ideavimrc".source = ./ideavimrc;
