@@ -25,7 +25,6 @@ in
         rev = "f99ff455e2d3272c9accf3cee6b759c1702d7892";
         hash = "sha256-LZdXKJYEq2L4zhVWVZCJbM9zf3cmNpdBWK4hQv1W4+0=";
       };
-      useFetchCargoVendor = true;
       cargoHash = "sha256-dzIjYAizPDe5//YHV7DyxVNHrF7xfLMJdK6x+YI2hQA=";
       buildAndTestSubdir = "crates/termtheme";
     };
@@ -116,7 +115,6 @@ in
         rev = "318a70933869d3a5c50bce06bda2887c3c287e84";
         sha256 = "1gqyxggxwk87ddcsisb4s1rw8f9z8lyxg95py0nn77q18w6f6srg";
       };
-      useFetchCargoVendor = true;
       cargoHash = "sha256-lz2FLvSkFSiI0CCm/fJwr3A7lXYpoWrLVM0IClC6t3s=";
       nativeBuildInputs = [
         super.autoPatchelfHook
@@ -139,7 +137,6 @@ in
       };
       fenv = super.rustPlatform.buildRustPackage {
         inherit (meta) pname version src;
-        useFetchCargoVendor = true;
         cargoHash = "sha256-aJgmNB6AvQuOGT3NNnai+ClEpH7TLUmegaS0S0y/Bdc=";
       };
     in {
