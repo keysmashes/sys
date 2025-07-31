@@ -41,7 +41,7 @@
           hash = [ "show" "-T" "stringify(commit_id)" ];
           id = [ "show" "-T" "stringify(change_id)" ];
           link = mkBashScript ''
-            jj rebase -s "$2" -d "all:($2)-" -d "$1"
+            jj rebase -s "$2" -d "all:($2)-|($1)"
           '';
           n = [ "next" "-e" ];
           p = [ "prev" "-e" ];
