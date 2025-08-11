@@ -65,8 +65,8 @@
           wip = [ "bookmark" "set" "--allow-backwards" "wip" "--revision" ];
           wop = [ "bookmark" "forget" "wip" ];
         };
-        core = {
-          fsmonitor = "watchman";
+        fsmonitor = {
+          backend = "watchman";
         };
         git = {
           private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
