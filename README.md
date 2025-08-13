@@ -1,3 +1,7 @@
+**New repository: <https://codeberg.org/keysmashes/sys>**
+
+---
+
 # sys
 
 dependency flake for my system configurations
